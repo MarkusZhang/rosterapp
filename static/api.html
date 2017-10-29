@@ -1,0 +1,818 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <title></title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link rel="stylesheet" href="github-pandoc.css" type="text/css" />
+</head>
+<body>
+<div id="TOC">
+<ul>
+<li><a href="#api-documentation">API Documentation</a><ul>
+<li><a href="#overview">Overview</a></li>
+<li><a href="#account"><a name="account"></a> Account</a><ul>
+<li><a href="#create-manager-account"><a name="create-manager-account"></a> Create Manager Account</a></li>
+<li><a href="#create-employee-account"><a name="create-employee-account"></a> Create Employee Account</a></li>
+<li><a href="#verify-email"><a name="verify-email"></a> Verify Email</a></li>
+<li><a href="#login"><a name="login"></a> Login</a></li>
+<li><a href="#logout"><a name="logout"></a> Logout</a></li>
+<li><a href="#handle-team"><a name="handle-team"></a> Handle Team</a></li>
+<li><a href="#filtering-fields"><a name="manipulate-category"></a> Filtering fields</a></li>
+<li><a href="#invite-team-member"><a name="invite-team-member"></a> Invite Team Member</a></li>
+<li><a href="#view-team-member"><a name="handle-team-member"></a> View Team Member</a></li>
+<li><a href="#verify-invitation-token"><a name="verify-invitation-token"></a> Verify Invitation Token</a></li>
+<li><a href="#withdraw-from-team"><a name="withdraw-from-team"></a> Withdraw From Team</a></li>
+<li><a href="#handle-preference"><a name="handle-preference"></a> Handle Preference</a></li>
+<li><a href="#filtering-fields-1"><a name=""></a> Filtering fields</a></li>
+<li><a href="#handle-my-profile"><a name="handle-my-profile"></a> Handle My Profile</a></li>
+</ul></li>
+<li><a href="#schedule"><a name="schedule"></a> Schedule</a><ul>
+<li><a href="#manipulate-schedule-plan"><a name="manipulate-schedule-plan"></a> Manipulate Schedule Plan</a></li>
+<li><a href="#manipulate-time-slot-plan"><a name="manipulate-time-slot-plan"></a> Manipulate Time Slot Plan</a></li>
+<li><a href="#manipulate-employee-for-scheduling"><a name="manipulate-employee-scheduling"></a> Manipulate Employee for scheduling</a></li>
+<li><a href="#start-auto-scheduling"><a name="start-auto-scheduling"></a> Start Auto Scheduling</a></li>
+<li><a href="#manipulate-schedule-result"><a name="manipulate-schedule-result"></a> Manipulate Schedule Result</a></li>
+<li><a href="#manipulate-time-slot-schedule-result"><a name="manipulate-time-slot-schedule-result"></a> Manipulate Time Slot Schedule Result</a></li>
+<li><a href="#set-timetable"><a name="set-timetable"></a> Set Timetable</a></li>
+<li><a href="#view-duty"><a name="view-duty"></a> View Duty</a></li>
+<li><a href="#request-swap-duty"><a name="request-swap"></a> Request Swap Duty</a></li>
+<li><a href="#respond-to-swap-request"><a name="respond-to-swap-request"></a> Respond to swap request</a></li>
+</ul></li>
+<li><a href="#notification"><a name="notification"></a> Notification</a><ul>
+<li><a href="#read-notification"><a name="read-notification"></a> Read Notification</a></li>
+</ul></li>
+<li><a href="#common-url"><a name="common-url"></a> Common url</a></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="api-documentation">API Documentation</h1>
+<h2 id="overview">Overview</h2>
+<hr />
+<table>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">URL</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="#account">Account</a></td>
+<td align="left"><code>/account</code></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#schedule">Schedule</a></td>
+<td align="left"><code>/schedule</code></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#notification">Notification</a></td>
+<td align="left"><code>/notification</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="account"><a name="account"></a> Account</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">URL</th>
+<th align="left">Method</th>
+<th align="left">Auth</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="#create-manager-account">Create manager account</a></td>
+<td align="left"><code>/manager/create/</code></td>
+<td align="left">POST</td>
+<td align="left">None</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#create-employee-account">Create employee account</a></td>
+<td align="left"><code>/employee/create/</code></td>
+<td align="left">POST</td>
+<td align="left">None</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#verify-email">Verify email</a></td>
+<td align="left"><code>/verify/&lt;token&gt;</code></td>
+<td align="left">GET</td>
+<td align="left">None</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#login">Login</a></td>
+<td align="left"><code>/login/</code></td>
+<td align="left">POST</td>
+<td align="left">None</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#logout">Logout</a></td>
+<td align="left"><code>/logout/</code></td>
+<td align="left">GET</td>
+<td align="left">Token</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#handle-team">Handle Team</a></td>
+<td align="left"><code>/team/</code></td>
+<td align="left">GET,POST</td>
+<td align="left">Token</td>
+<td align="left"><a href="#common-url">Common url pattern</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#invite-team-member">Invite team member</a></td>
+<td align="left"><code>/team/invite-member/</code></td>
+<td align="left">POST</td>
+<td align="left">Token</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#handle-team-member">Get team member</a></td>
+<td align="left"><code>/team/&lt;team_name&gt;/member/</code></td>
+<td align="left">GET</td>
+<td align="left">Token</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#verify-invitation-token">Verify Invitation Token</a></td>
+<td align="left"><code>/team/invitation/verify/&lt;token&gt;</code></td>
+<td align="left">GET</td>
+<td align="left">Token</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#withdraw-from-team">Withdraw from team</a></td>
+<td align="left"><code>/team/withdraw/</code></td>
+<td align="left">POST</td>
+<td align="left">Token</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#handle-preference">Handle Preference</a></td>
+<td align="left"><code>/preference/</code></td>
+<td align="left">GET,POST</td>
+<td align="left">Token</td>
+<td align="left"><a href="#common-url">Common url pattern</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#handle-my-profile">Handle my profile</a></td>
+<td align="left"><code>/profile/</code></td>
+<td align="left">GET,POST</td>
+<td align="left">Token</td>
+<td align="left"><a href="#common-url">Common url pattern</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="create-manager-account"><a name="create-manager-account"></a> Create Manager Account</h3>
+<p>Request example:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;password&quot;</span><span class="fu">:</span> <span class="st">&quot;mypassword&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;name&quot;</span> <span class="fu">:</span> <span class="st">&quot;Mr Patrick&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;email&quot;</span> <span class="fu">:</span> <span class="st">&quot;some@mymail.com&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;telephone&quot;</span><span class="fu">:</span> <span class="st">&quot;12345678&quot;</span><span class="fu">,</span>
+<span class="fu">}</span></code></pre></div>
+<p>Response if the username exists in the system:</p>
+<ul>
+<li>Status code: <code>403 Forbidden</code></li>
+</ul>
+<p>Response example if successful:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;token&quot;</span><span class="fu">:</span> <span class="st">&quot;9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="create-employee-account"><a name="create-employee-account"></a> Create Employee Account</h3>
+<p>Request example:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;password&quot;</span><span class="fu">:</span> <span class="st">&quot;mypassword&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;name&quot;</span> <span class="fu">:</span> <span class="st">&quot;Tony&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;email&quot;</span> <span class="fu">:</span> <span class="st">&quot;some@mymail.com&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;gender&quot;</span><span class="fu">:</span> <span class="st">&quot;male&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;telephone&quot;</span> <span class="fu">:</span> <span class="st">&quot;12345678&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;team&quot;</span> <span class="fu">:</span> <span class="st">&quot;name of a team&quot;</span> <span class="er">//</span> <span class="er">this</span> <span class="er">is</span> <span class="er">optional</span>
+<span class="fu">}</span></code></pre></div>
+<p>Response if the username exists in the system:</p>
+<ul>
+<li>Status code: <code>403 Forbidden</code></li>
+</ul>
+<p>Response example if successful:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;token&quot;</span><span class="fu">:</span> <span class="st">&quot;9944b09199c62bcf9418ad846dd0e4bbdfc6ee4b&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="verify-email"><a name="verify-email"></a> Verify Email</h3>
+<p>Response if the verification is successful:</p>
+<ul>
+<li><p>Status code: <code>200 okay</code></p></li>
+<li><p>Data :</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;msg&quot;</span><span class="fu">:</span> <span class="st">&quot;Your email has been verified&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<p>Response example if unsuccessful:</p>
+<ul>
+<li>Status code: <code>400 bad request</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;msg&quot;</span><span class="fu">:</span> <span class="st">&quot;Invalid verification code&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="login"><a name="login"></a> Login</h3>
+<p>Request example:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;username&quot;</span><span class="fu">:</span> <span class="st">&quot;myusername&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;password&quot;</span><span class="fu">:</span> <span class="st">&quot;mypassword&quot;</span><span class="fu">,</span>
+<span class="fu">}</span></code></pre></div>
+<p>Response if the verification is successful:</p>
+<ul>
+<li><p>Status code: <code>200 okay</code></p></li>
+<li><p>Data :</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;token&quot;</span><span class="fu">:</span> <span class="st">&quot;fsdfsadfsdgergdsrgerg&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<p>Response example if unsuccessful:</p>
+<ul>
+<li>Status code: <code>401 unauthorized</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;detail&quot;</span><span class="fu">:</span> <span class="st">&quot;Invalid username or password&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="logout"><a name="logout"></a> Logout</h3>
+<p>Response if the verification is successful:</p>
+<ul>
+<li><p>Status code: <code>200 okay</code></p></li>
+<li><p>Data :</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;msg&quot;</span><span class="fu">:</span> <span class="st">&quot;You have successfully logged out&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<p>Response example if unsuccessful:</p>
+<ul>
+<li>Status code: <code>400 bad request</code></li>
+</ul>
+<h3 id="handle-team"><a name="handle-team"></a> Handle Team</h3>
+<p>This api follows the <a href="#common-url">common url pattern</a>.</p>
+<h3 id="filtering-fields"><a name="manipulate-category"></a> Filtering fields</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">format</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">name</td>
+<td align="left">normal string</td>
+</tr>
+</tbody>
+</table>
+<p>Note: The api will only return the teams that involve the current user.</p>
+<h4 id="format-of-retrieved-data"><a name=""></a> Format of retrieved data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+    <span class="fu">{</span>
+        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Sports Team&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;head&quot;</span><span class="fu">:</span> <span class="st">&quot;Mr Alex&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+<span class="er">...</span>
+<span class="ot">]</span></code></pre></div>
+<h4 id="format-of-post-data"><a name=""></a> Format of post data</h4>
+<p>Note: this is only for manager</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Arts team&quot;</span><span class="fu">,</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="invite-team-member"><a name="invite-team-member"></a> Invite Team Member</h3>
+<p>Request example:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;team&quot;</span> <span class="fu">:</span> <span class="st">&quot;name of your team&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;emails&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+        <span class="st">&quot;member1@aa.com&quot;</span><span class="ot">,</span>
+        <span class="st">&quot;member2@bb.com&quot;</span>
+    <span class="ot">]</span>
+<span class="fu">}</span></code></pre></div>
+<p>Response if invitations are successfully sent:</p>
+<ul>
+<li>Status code: <code>200 okay</code></li>
+</ul>
+<p>Response example if unsuccessful:</p>
+<ul>
+<li>Status code: <code>400 bad request</code> or <code>404 bad request</code></li>
+</ul>
+<h3 id="view-team-member"><a name="handle-team-member"></a> View Team Member</h3>
+<p>Note: The api will only return members that are in the same team as the current user.</p>
+<h4 id="format-of-retrieved-data-1"><a name=""></a> Format of retrieved data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+    <span class="fu">{</span>
+        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Sports Team&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;email&quot;</span><span class="fu">:</span> <span class="st">&quot;a@a.com&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;telephone&quot;</span><span class="fu">:</span><span class="st">&quot;12345678&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;on_leave&quot;</span><span class="fu">:</span><span class="kw">false</span>
+    <span class="fu">}</span><span class="ot">,</span>
+<span class="er">...</span>
+<span class="ot">]</span></code></pre></div>
+<h4 id="format-of-post-data-1"><a name=""></a> Format of post data</h4>
+<p>No post is allowed in this api</p>
+<h3 id="verify-invitation-token"><a name="verify-invitation-token"></a> Verify Invitation Token</h3>
+<p>Response if the invitation token is valid.</p>
+<ul>
+<li><p>Status code: <code>200 okay</code></p></li>
+<li><p>Data :</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;email&quot;</span><span class="fu">:</span> <span class="st">&quot;your_email@a.com&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;team&quot;</span><span class="fu">:</span> <span class="st">&quot;name of the team&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<p>Response example if unsuccessful:</p>
+<ul>
+<li>Status code: <code>400 bad request</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;msg&quot;</span><span class="fu">:</span> <span class="st">&quot;Invalid invitation token&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="withdraw-from-team"><a name="withdraw-from-team"></a> Withdraw From Team</h3>
+<p>Post data format:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;team&quot;</span><span class="fu">:</span> <span class="st">&quot;the name of the team that user wants to withdraw from&quot;</span><span class="fu">,</span>
+    <span class="dt">&quot;reason&quot;</span><span class="fu">:</span> <span class="st">&quot;... &quot;</span> <span class="er">//this</span> <span class="er">is</span> <span class="er">optional</span>
+<span class="fu">}</span></code></pre></div>
+<p>Response if the withdrawal is successful:</p>
+<ul>
+<li><p>Status code: <code>200 okay</code></p></li>
+<li><p>Data :</p></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;msg&quot;</span><span class="fu">:</span> <span class="st">&quot;You have withdrew from team ...&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<p>Response example if unsuccessful:</p>
+<ul>
+<li>Status code: <code>400 bad request</code></li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;msg&quot;</span><span class="fu">:</span> <span class="st">&quot;Invalid team name&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="handle-preference"><a name="handle-preference"></a> Handle Preference</h3>
+<p>This api follows the <a href="#common-url">common url pattern</a>.</p>
+<h3 id="filtering-fields-1"><a name=""></a> Filtering fields</h3>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">format</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">username</td>
+<td align="left">normal string</td>
+</tr>
+</tbody>
+</table>
+<p>Note: the listing api will only return the user preference of the current user</p>
+<h4 id="format-of-retrieved-data-2"><a name=""></a> Format of retrieved data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json">    <span class="fu">{</span>
+        <span class="dt">&quot;user_id&quot;</span><span class="fu">:</span> <span class="st">&quot;1&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;email&quot;</span> <span class="fu">:</span> <span class="st">&quot;a@a.com&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;notification_method&quot;</span><span class="fu">:</span><span class="st">&quot;sms&quot;</span>
+    <span class="fu">}</span></code></pre></div>
+<h4 id="format-of-postput-data"><a name=""></a> Format of post/put data</h4>
+<p>This is for changing user’s preference</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+    <span class="fu">{</span>
+        <span class="dt">&quot;notification_method&quot;</span><span class="fu">:</span><span class="st">&quot;email&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+<span class="er">...</span>
+<span class="ot">]</span></code></pre></div>
+<h3 id="handle-my-profile"><a name="handle-my-profile"></a> Handle My Profile</h3>
+<p>This api follows the <a href="#common-url">common url pattern</a>.</p>
+<p>The listing api will only return the profile of the current user.</p>
+<h4 id="format-of-retrieved-data-3"><a name=""></a> Format of retrieved data</h4>
+<p>For manager:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json">    <span class="fu">{</span>
+        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;John&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;telephone&quot;</span><span class="fu">:</span> <span class="st">&quot;1234&quot;</span>
+    <span class="fu">}</span></code></pre></div>
+<p>For employee:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json">    <span class="fu">{</span>
+        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;John&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;telephone&quot;</span><span class="fu">:</span> <span class="st">&quot;1234&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;performance_grade&quot;</span><span class="fu">:</span><span class="dv">90</span><span class="fu">,</span>
+        <span class="dt">&quot;on_leave&quot;</span><span class="fu">:</span> <span class="kw">false</span>
+    <span class="fu">}</span></code></pre></div>
+<h4 id="format-of-post-data-2"><a name=""></a> Format of post data</h4>
+<p>For manager:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;telephone&quot;</span><span class="fu">:</span> <span class="st">&quot;12345&quot;</span><span class="fu">,</span>
+  
+<span class="fu">}</span></code></pre></div>
+<p>For employee:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;telephone&quot;</span><span class="fu">:</span> <span class="st">&quot;12345&quot;</span><span class="fu">,</span>
+  <span class="dt">&quot;on_leave&quot;</span><span class="fu">:</span> <span class="kw">true</span>
+<span class="fu">}</span></code></pre></div>
+<h2 id="schedule"><a name="schedule"></a> Schedule</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">URL</th>
+<th align="left">Method</th>
+<th align="left">Auth</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="#manipulate-schedule-plan">Manipulate schedule plan</a></td>
+<td align="left"><code>/schedule/plan/</code></td>
+<td align="left">GET, POST</td>
+<td align="left">Token</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#manipulate-time-slot-plan">Manipulate time slot plan</a></td>
+<td align="left"><code>/schedule/plan/&lt;schedule_plan_id&gt;/time-slot-plan/</code></td>
+<td align="left">POST,GET</td>
+<td align="left">Token</td>
+<td align="left"><a href="#common-url">Common url pattern</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#manipulate-employee-scheduling">Manipulate employee for scheduling</a></td>
+<td align="left"><code>/schedule/plan/&lt;schedule_plan_id&gt;/employee/</code></td>
+<td align="left">POST,GET</td>
+<td align="left">Token</td>
+<td align="left"><a href="#common-url">Common url pattern</a></td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#start-auto-scheduling">Start auto scheduling</a></td>
+<td align="left"><code>/schedule/plan/&lt;schedule_plan_id&gt;/start-auto/</code></td>
+<td align="left">POST</td>
+<td align="left">Token</td>
+<td align="left"><a href="#common-url">Common url pattern</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#manipulate-schedule-result">Manipulate schedule result</a></td>
+<td align="left"><code>/schedule/plan/&lt;schedule_plan_id&gt;/result/</code></td>
+<td align="left">GET, POST</td>
+<td align="left">Token</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#manipulate-time-slot-schedule-result">Manipulate time slot schedule result</a></td>
+<td align="left"><code>/schedule/plan/&lt;schedule_plan_id&gt;/time-slot-result/</code></td>
+<td align="left">GET, POST</td>
+<td align="left">Token</td>
+<td align="left"><a href="#common-url">Common url pattern</a></td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#set-timetable">Set timetable</a></td>
+<td align="left"><code>/schedule/timetable/</code></td>
+<td align="left">GET, POST</td>
+<td align="left">Token</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#view-duty">View duty</a></td>
+<td align="left"><code>/schedule/duty/</code></td>
+<td align="left">GET</td>
+<td align="left">Token</td>
+</tr>
+<tr class="odd">
+<td align="left"><a href="#request-swap">Request swap</a></td>
+<td align="left"><code>/schedule/swap/request/</code></td>
+<td align="left">POST</td>
+<td align="left">Token</td>
+</tr>
+<tr class="even">
+<td align="left"><a href="#respond-to-swap-request">Respond to swap request</a></td>
+<td align="left"><code>/schedule/swap/respond/</code></td>
+<td align="left">POST</td>
+<td align="left">Token</td>
+</tr>
+</tbody>
+</table>
+<h3 id="manipulate-schedule-plan"><a name="manipulate-schedule-plan"></a> Manipulate Schedule Plan</h3>
+<p>This api follows the <a href="#common-url">common url pattern</a>.</p>
+<p>This api is only for manager.</p>
+<h4 id="format-of-retrieved-data-4"><a name=""></a> Format of retrieved data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json">    <span class="fu">{</span>
+        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Meeting plan&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;some plan&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;start_time&quot;</span><span class="fu">:</span><span class="st">&quot;2015-10-10T12:00:00Z&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;end_time&quot;</span><span class="fu">:</span><span class="st">&quot;2015-10-10T14:00:00Z&quot;</span><span class="fu">,</span>
+    <span class="fu">}</span></code></pre></div>
+<h4 id="format-of-post-data-3"><a name=""></a> Format of post data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;Meeting plan&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;some plan&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;start_time&quot;</span><span class="fu">:</span><span class="st">&quot;2015-10-10T12:00:00Z&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;end_time&quot;</span><span class="fu">:</span><span class="st">&quot;2015-10-10T14:00:00Z&quot;</span><span class="fu">,</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="manipulate-time-slot-plan"><a name="manipulate-time-slot-plan"></a> Manipulate Time Slot Plan</h3>
+<p>This api follows the <a href="#common-url">common url pattern</a>.</p>
+<p>This api is only for manager.</p>
+<h4 id="format-of-retrieved-data-5"><a name=""></a> Format of retrieved data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json">    <span class="fu">{</span>
+        <span class="dt">&quot;plan_name&quot;</span><span class="fu">:</span> <span class="st">&quot;Meeting plan&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;start_time&quot;</span><span class="fu">:</span><span class="st">&quot;2015-10-10T12:00:00Z&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;end_time&quot;</span><span class="fu">:</span><span class="st">&quot;2015-10-10T13:00:00Z&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;requirement&quot;</span><span class="fu">:</span><span class="st">&quot;male only&quot;</span><span class="fu">,</span> <span class="er">//</span> <span class="er">this</span> <span class="er">is</span> <span class="er">optional</span>
+        <span class="dt">&quot;number_of_people&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span>
+        <span class="dt">&quot;location&quot;</span> <span class="fu">:</span> <span class="st">&quot;SCE student lounge&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;priority&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span> <span class="er">//</span> <span class="er">range</span> <span class="er">from</span> <span class="er">1</span> <span class="er">to</span> <span class="er">5</span><span class="fu">,</span> <span class="er">default</span> <span class="er">is</span> <span class="er">3</span>
+        <span class="dt">&quot;task_description&quot;</span><span class="fu">:</span> <span class="st">&quot;attend the meeting&quot;</span>
+    <span class="fu">}</span></code></pre></div>
+<h4 id="format-of-post-data-4"><a name=""></a> Format of post data</h4>
+<p>same as the format of the retrieved data.</p>
+<h3 id="manipulate-employee-for-scheduling"><a name="manipulate-employee-scheduling"></a> Manipulate Employee for scheduling</h3>
+<p>This api follows the <a href="#common-url">common url pattern</a>.</p>
+<p>This api is only for manager.</p>
+<h4 id="format-of-retrieved-data-6"><a name=""></a> Format of retrieved data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+    <span class="fu">{</span>
+        <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+        <span class="dt">&quot;name&quot;</span> <span class="fu">:</span> <span class="st">&quot;James&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;email&quot;</span> <span class="fu">:</span> <span class="st">&quot;james@hotmail.com&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span>
+    <span class="er">....</span>
+<span class="ot">]</span></code></pre></div>
+<h4 id="format-of-post-data-5"><a name=""></a> Format of post data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;selected_employees&quot;</span> <span class="fu">:</span>
+    <span class="ot">[</span>
+        <span class="dv">1</span><span class="ot">,</span>
+        <span class="dv">2</span><span class="ot">,</span>
+        <span class="dv">24</span><span class="ot">,</span> <span class="er">//employee</span> <span class="er">ids</span>
+    <span class="ot">]</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="start-auto-scheduling"><a name="start-auto-scheduling"></a> Start Auto Scheduling</h3>
+<p>This api is only for manager.</p>
+<h4 id="format-of-post-data-6"><a name=""></a> Format of post data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;deadline_for_result&quot;</span> <span class="fu">:</span> <span class="st">&quot;2015-10-10T12:20:20Z&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<p>If auto scheduling is successfully started, you will get</p>
+<ul>
+<li>response code : <code>200 okay</code></li>
+</ul>
+<p>If there’s error, you will get</p>
+<ul>
+<li>response code : <code>400 bad request</code></li>
+</ul>
+<p>and a message like:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+    <span class="dt">&quot;msg&quot;</span> <span class="fu">:</span> <span class="st">&quot;The post data format is wrong&quot;</span>
+<span class="fu">}</span></code></pre></div>
+<h3 id="manipulate-schedule-result"><a name="manipulate-schedule-result"></a> Manipulate Schedule Result</h3>
+<p>This api is only for manager.</p>
+<h4 id="format-of-retrieved-data-7"><a name=""></a> Format of retrieved data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json">    <span class="fu">{</span>
+        <span class="dt">&quot;plan_name&quot;</span><span class="fu">:</span> <span class="st">&quot;Meeting plan&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;status&quot;</span><span class="fu">:</span><span class="st">&quot;accepted&quot;</span><span class="fu">,</span> <span class="er">//</span> <span class="er">or</span> <span class="dt">&quot;pending&quot;</span>
+        <span class="dt">&quot;is_auto_roster&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span>
+        <span class="dt">&quot;time_slot_results&quot;</span><span class="fu">:</span>
+        <span class="ot">[</span>
+            <span class="fu">{</span>
+                <span class="dt">&quot;time_slot_plan_id&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+                <span class="dt">&quot;start_time&quot;</span><span class="fu">:</span><span class="st">&quot;2015-10-10T10:10:10Z&quot;</span><span class="fu">,</span>
+                <span class="dt">&quot;end_time&quot;</span><span class="fu">:</span><span class="st">&quot;2015-10-10T13:10:10Z&quot;</span><span class="fu">,</span>
+                <span class="dt">&quot;location&quot;</span><span class="fu">:</span><span class="st">&quot;SCE&quot;</span><span class="fu">,</span>
+                <span class="dt">&quot;employee_id&quot;</span><span class="fu">:</span> <span class="dv">12</span><span class="fu">,</span>
+                <span class="dt">&quot;employee_name&quot;</span><span class="fu">:</span> <span class="st">&quot;James&quot;</span>
+            <span class="fu">}</span><span class="ot">,</span>
+            <span class="er">...</span>
+        <span class="ot">]</span>
+    <span class="fu">}</span></code></pre></div>
+<h4 id="format-of-post-data-7"><a name=""></a> Format of post data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json">    <span class="fu">{</span>
+        <span class="dt">&quot;plan_name&quot;</span><span class="fu">:</span> <span class="st">&quot;Meeting plan&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;time_slot_results&quot;</span><span class="fu">:</span>
+        <span class="ot">[</span>
+            <span class="fu">{</span>
+                <span class="dt">&quot;time_slot_plan_id&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span>
+                <span class="dt">&quot;employee_id&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="dv">12</span><span class="ot">,</span><span class="dv">2</span><span class="ot">]</span>
+            <span class="fu">}</span><span class="ot">,</span>
+            <span class="er">...</span>
+        <span class="ot">]</span>
+    <span class="fu">}</span></code></pre></div>
+<h3 id="manipulate-time-slot-schedule-result"><a name="manipulate-time-slot-schedule-result"></a> Manipulate Time Slot Schedule Result</h3>
+<p>This api is only for manager.</p>
+<h4 id="format-of-retrieved-data-8"><a name=""></a> Format of retrieved data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json">    <span class="fu">{</span>
+        <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">12</span><span class="fu">,</span>
+        <span class="dt">&quot;plan_id&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span> <span class="er">//</span> <span class="er">id</span> <span class="er">of</span> <span class="er">time</span> <span class="er">slot</span> <span class="er">roster</span> <span class="er">plan</span>
+        <span class="dt">&quot;employee&quot;</span><span class="fu">:</span><span class="ot">[</span>
+            <span class="fu">{</span>
+                <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="dv">12</span><span class="fu">,</span>
+                <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;James&quot;</span>
+            <span class="fu">}</span><span class="ot">,</span>
+            <span class="er">...</span>
+    <span class="ot">]</span><span class="fu">,</span> 
+        <span class="dt">&quot;start_time&quot;</span> <span class="fu">:</span> <span class="st">&quot;2010-10-10T10:10:10Z&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;end_time&quot;</span> <span class="fu">:</span> <span class="st">&quot;2010-10-12T10:10:10Z&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;location&quot;</span><span class="fu">:</span> <span class="st">&quot;SCE&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;task_description&quot;</span><span class="fu">:</span> <span class="st">&quot;wash toilet&quot;</span>
+    <span class="fu">}</span></code></pre></div>
+<h4 id="format-of-post-data-8"><a name=""></a> Format of post data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json">    <span class="fu">{</span>
+        <span class="dt">&quot;plan_id&quot;</span><span class="fu">:</span> <span class="dv">12</span><span class="fu">,</span>
+        <span class="dt">&quot;employee&quot;</span><span class="fu">:</span><span class="ot">[</span><span class="dv">1</span><span class="ot">,</span><span class="dv">2</span><span class="ot">,</span><span class="dv">3</span><span class="ot">]</span> <span class="er">//</span> <span class="er">employee</span> <span class="er">ids</span>
+    <span class="fu">}</span></code></pre></div>
+<h3 id="set-timetable"><a name="set-timetable"></a> Set Timetable</h3>
+<p>This api is only for employee for indicate their occupied time slots.</p>
+<p>You can use GET method to retrieve the time table.</p>
+<h4 id="format-of-retrieved-data-9"><a name=""></a> Format of retrieved data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+    <span class="fu">{</span>
+        <span class="dt">&quot;start_time&quot;</span><span class="fu">:</span><span class="st">&quot;2010-10-10T10:10:10&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;end_time&quot;</span><span class="fu">:</span> <span class="st">&quot;2010-10-10T14:10:10&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;reason&quot;</span><span class="fu">:</span> <span class="st">&quot;not available&quot;</span><span class="fu">,</span> <span class="er">//</span> <span class="er">this</span> <span class="er">is</span> <span class="er">optional</span>
+    <span class="fu">}</span><span class="ot">,</span> <span class="er">//occupied</span> <span class="er">time</span> <span class="er">slots</span>
+    <span class="er">....</span>
+<span class="ot">]</span></code></pre></div>
+<p>You can use POST to update the time table</p>
+<h4 id="format-of-post-data-9"><a name=""></a> Format of post data</h4>
+<p>same as the format of the retrieved data</p>
+<h3 id="view-duty"><a name="view-duty"></a> View Duty</h3>
+<p>This api is only for employee for see their allocated duties.</p>
+<p>You can use GET method to retrieve the time table.</p>
+<h4 id="format-of-retrieved-data-10"><a name=""></a> Format of retrieved data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+    <span class="fu">{</span>
+        <span class="dt">&quot;start_time&quot;</span><span class="fu">:</span><span class="st">&quot;2010-10-10T10:10:10&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;end_time&quot;</span><span class="fu">:</span> <span class="st">&quot;2010-10-10T14:10:10&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;location&quot;</span><span class="fu">:</span> <span class="st">&quot;SCE&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;task_description&quot;</span> <span class="fu">:</span> <span class="st">&quot;some thing&quot;</span>
+    <span class="fu">}</span><span class="ot">,</span> 
+    <span class="er">....</span>
+<span class="ot">]</span></code></pre></div>
+<h3 id="request-swap-duty"><a name="request-swap"></a> Request Swap Duty</h3>
+<p>This api is only for employee for request to swap time slot with another employee.</p>
+<h4 id="format-of-post-data-10"><a name=""></a> Format of post data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+    <span class="fu">{</span>
+        <span class="dt">&quot;swap_from&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span> <span class="er">//</span> <span class="er">id</span> <span class="er">of</span> <span class="er">the</span> <span class="er">time</span> <span class="er">slot</span> <span class="er">schedule</span> <span class="er">result</span>
+        <span class="dt">&quot;swap_to&quot;</span><span class="fu">:</span> <span class="dv">12</span><span class="fu">,</span> <span class="er">//</span> <span class="er">id</span> <span class="er">of</span> <span class="er">the</span> <span class="er">time</span> <span class="er">slot</span> <span class="er">schedule</span> <span class="er">plan</span>
+    <span class="fu">}</span><span class="ot">,</span> 
+    <span class="er">....</span>
+<span class="ot">]</span></code></pre></div>
+<h3 id="respond-to-swap-request"><a name="respond-to-swap-request"></a> Respond to swap request</h3>
+<p>This api is only for employee for respond to request for swap.</p>
+<h4 id="format-of-post-data-11"><a name=""></a> Format of post data</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+    <span class="fu">{</span>
+        <span class="dt">&quot;request_id&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span> <span class="er">//</span> <span class="er">id</span> <span class="er">of</span> <span class="er">the</span> <span class="er">swap</span> <span class="er">request</span>
+        <span class="dt">&quot;response&quot;</span><span class="fu">:</span> <span class="st">&quot;accept&quot;</span> <span class="er">//</span> <span class="er">or</span> <span class="st">&quot;reject&quot;</span> 
+    <span class="fu">}</span><span class="ot">,</span> 
+    <span class="er">....</span>
+<span class="ot">]</span></code></pre></div>
+<h2 id="notification"><a name="notification"></a> Notification</h2>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Name</th>
+<th align="left">URL</th>
+<th align="left">Method</th>
+<th align="left">Auth</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left"><a href="#read-notification">Read notification</a></td>
+<td align="left"><code>/read/</code></td>
+<td align="left">GET</td>
+<td align="left">Token</td>
+<td align="left"><a href="#common-url">Common url pattern</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="read-notification"><a name="read-notification"></a> Read Notification</h3>
+<p>This api is for all users to retrieve notifications</p>
+<h4 id="format-of-data-retrieved"><a name=""></a> Format of data retrieved</h4>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="ot">[</span>
+    <span class="fu">{</span>
+        <span class="dt">&quot;code&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span> <span class="er">//</span> <span class="er">type</span> <span class="er">of</span> <span class="er">notification</span>
+        <span class="dt">&quot;message&quot;</span><span class="fu">:</span> <span class="st">&quot;Scheduling is done&quot;</span><span class="fu">,</span>
+        <span class="dt">&quot;detail&quot;</span><span class="fu">:</span> <span class="fu">{</span>
+            <span class="er">//</span> <span class="er">format</span> <span class="er">varies</span> <span class="er">according</span> <span class="er">to</span> <span class="er">notification</span> <span class="er">type</span>
+        <span class="fu">}</span> 
+    <span class="fu">}</span><span class="ot">,</span> 
+    <span class="er">....</span>
+<span class="ot">]</span></code></pre></div>
+<p>The meaning of <code>code</code> is as follows:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Code</th>
+<th align="left">Meaning</th>
+<th align="left">Targe user</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="left">Roster Result Out</td>
+<td align="left">manager</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="left">Roster arrangement changed (mostly due to swap)</td>
+<td align="left">manager</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="left">New time table polling opens to you</td>
+<td align="left">employee</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="left">New duty is assigned to you</td>
+<td align="left">employee</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="left">Someone sends swap-slot request to you</td>
+<td align="left">employee</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="left">Your request for swap is approved</td>
+<td align="left">employee</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="left">Your request for swap is rejected</td>
+<td align="left">employee</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="left">You are requested to join a new team</td>
+<td align="left">employee</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="left">A person you invited has joined your team</td>
+<td align="left">manager</td>
+</tr>
+</tbody>
+</table>
+<h2 id="common-url"><a name="common-url"></a> Common url</h2>
+<p>For the api that follows the common url pattern, you can do retrieve, create, update in the following way: (let’s say you want to manipulate event data, and the base url for that is <code>/event/</code>)</p>
+<h4 id="create"><a name="common-url-create"></a> Create</h4>
+<p>Request url: <code>/event/</code> Method: <code>POST</code> For the format of the post data, refer to the detail of the particular api you are using.</p>
+<p>If the creation is successful, you will get the created object in json format (same as the format of the post data) and http status code will be <code>201 created</code>. If there’re some invalid fields in your post data, you will receive something like the following:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+    <span class="st">&quot;This field must be unique.&quot;</span>
+  <span class="ot">]</span>
+<span class="fu">}</span></code></pre></div>
+<p>The http status code will be <code>400 bad request</code></p>
+<h4 id="update"><a name="common-url-update"></a> Update</h4>
+<p>Request url: <code>/event/&lt;object_id&gt;/</code> Method: <code>PUT</code>, <code>PATCH</code> (To fully update an object, use <code>PUT</code>, and you need to post all the data required for constructing the object) (To partially update an object, use <code>PATCH</code>, and you only need to post the attributes you want to update)</p>
+<p>For the format of the post data, refer to the detail of the particular api you are using.</p>
+<p>If the update is successful, you will get the created object in json format (same as the format of the post data) and http status code will be <code>200 ok</code>.</p>
+<p>If there’re some invalid/missing fields in your post data, you will receive something like the following:</p>
+<div class="sourceCode"><pre class="sourceCode json"><code class="sourceCode json"><span class="fu">{</span>
+  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="ot">[</span>
+    <span class="st">&quot;This field is required.&quot;</span>
+  <span class="ot">]</span>
+<span class="fu">}</span></code></pre></div>
+<p>The http status code will be <code>400 bad request</code></p>
+<h4 id="retrieve"><a name="common-url-retrieve"></a> Retrieve</h4>
+<p>Request url: <code>/event/</code> Method: <code>GET</code></p>
+<p>By default, it will return a list of all event objects, for the format of the json list, refer to the detail of the particular api you are using.</p>
+<p>Http status code will be <code>200 ok</code>.</p>
+<p>To do filtering, you can append query string like the following: <code>/event/?category=Sports&amp;fee=0</code></p>
+<p>Refer to the detail of the particular api to see what filtering fields can be used.</p>
+</body>
+</html>
